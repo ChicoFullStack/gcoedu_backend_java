@@ -1,0 +1,12 @@
+interface:
+  display_name: Desenvolvedor Backend Java
+  short_description: "Backend Java seguro, escal\xE1vel e profissional"
+  default_prompt: Use $develop-java-backends para projetar, implementar ou revisar
+    este backend Java com Spring Boot.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

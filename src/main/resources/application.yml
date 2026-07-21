@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: gcoedu-core
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-naming-strategy: SNAKE_CASE
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres_db}
+    username: ${DATABASE_USER:postgres_user}
+    password: ${DATABASE_PASS:postgres_password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:redis1234}
+
+jwt:
+  secret: ${JWT_SECRET_KEY:55e0a4826835cf63ee30bcf0972f5df410fa775bd807041bd9a317cf0c45d5e4}
+  expiration: 86400000 # 24 hours
+
+minio:
+  url: ${MINIO_SERVER_URL:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin123}
+  bucket: ${MINIO_BUCKET:gcoedu}
+
+logging:
+  level:
+    com.gcoedu.core: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

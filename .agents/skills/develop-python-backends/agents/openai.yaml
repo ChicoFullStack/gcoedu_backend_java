@@ -1,0 +1,12 @@
+interface:
+  display_name: Desenvolvedor Backend Python
+  short_description: "Backend Python seguro, limpo e pronto para produ\xE7\xE3o"
+  default_prompt: Use $develop-python-backends para arquitetar, implementar, integrar,
+    testar ou preparar o deploy deste backend Python.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

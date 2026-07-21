@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Desempenho - {{ testName }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #0056b3;
+            margin: 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .summary-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+        .summary-box p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .summary-box strong {
+            color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #0056b3;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .grade-high {
+            color: green;
+            font-weight: bold;
+        }
+        .grade-low {
+            color: red;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>GCOEdu - Relatório de Desempenho</h1>
+        <p>Avaliação: <strong>{{ testName }}</strong></p>
+    </div>
+
+    <div class="summary-box">
+        <p>Total de Alunos Avaliados: <strong>{{ totalStudents }}</strong></p>
+        <p>Média Geral da Prova: <strong>{{ averageGrade }}</strong></p>
+    </div>
+
+    <h2>Resultados Individuais</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Aluno</th>
+                <th>Acertos</th>
+                <th>Percentual (%)</th>
+                <th>Nota Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.studentName }}</td>
+                <td>{{ result.correctAnswers }}</td>
+                <td>{{ result.scorePercentage }}%</td>
+                <td class="{% if result.grade >= 6.0 %}grade-high{% else %}grade-low{% endif %}">
+                    {{ result.grade }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        Gerado automaticamente pelo sistema GCOEdu em {{ generationDate }}
+    </div>
+
+</body>
+</html>
