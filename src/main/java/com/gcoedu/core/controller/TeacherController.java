@@ -25,13 +25,15 @@ public class TeacherController {
     private final AuthService authService;
     private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
     private final com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository;
+    private final com.gcoedu.core.repository.publics.CityRepository cityRepository;
 
-    public TeacherController(TeacherService teacherService, UserRepository userRepository, AuthService authService, org.springframework.security.crypto.password.PasswordEncoder passwordEncoder, com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository) {
+    public TeacherController(TeacherService teacherService, UserRepository userRepository, AuthService authService, org.springframework.security.crypto.password.PasswordEncoder passwordEncoder, com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository, com.gcoedu.core.repository.publics.CityRepository cityRepository) {
         this.teacherService = teacherService;
         this.userRepository = userRepository;
         this.authService = authService;
         this.passwordEncoder = passwordEncoder;
         this.teacherRepository = teacherRepository;
+        this.cityRepository = cityRepository;
     }
 
     @GetMapping
@@ -79,9 +81,7 @@ public class TeacherController {
                 }
                 user.setRole(RoleEnum.PROFESSOR);
                 if (cityId != null && !cityId.isEmpty()) {
-                    com.gcoedu.core.domain.entity.publics.City city = new com.gcoedu.core.domain.entity.publics.City();
-                    city.setId(cityId);
-                    user.setCity(city);
+                    user.setCity(cityRepository.getReferenceById(cityId));
                 }
                 userRepository.save(user);
             }
