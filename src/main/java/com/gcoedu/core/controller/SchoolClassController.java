@@ -45,6 +45,7 @@ public class SchoolClassController {
 
     @GetMapping("/{id}/teachers")
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TECADM', 'TEACHER', 'DIRETOR', 'COORDENADOR')")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public ResponseEntity<List<java.util.Map<String, Object>>> getClassTeachers(@PathVariable String id) {
         List<com.gcoedu.core.domain.entity.tenant.Teacher> teachers = teacherClassRepository.findTeachersByClassId(id);
         
