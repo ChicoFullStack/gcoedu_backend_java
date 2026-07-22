@@ -23,11 +23,15 @@ public class TeacherController {
     private final TeacherService teacherService;
     private final UserRepository userRepository;
     private final AuthService authService;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+    private final com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository;
 
-    public TeacherController(TeacherService teacherService, UserRepository userRepository, AuthService authService) {
+    public TeacherController(TeacherService teacherService, UserRepository userRepository, AuthService authService, org.springframework.security.crypto.password.PasswordEncoder passwordEncoder, com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository) {
         this.teacherService = teacherService;
         this.userRepository = userRepository;
         this.authService = authService;
+        this.passwordEncoder = passwordEncoder;
+        this.teacherRepository = teacherRepository;
     }
 
     @GetMapping
@@ -44,8 +48,66 @@ public class TeacherController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TECADM')")
-    public ResponseEntity<TeacherDTO> createTeacher(@Valid @RequestBody TeacherDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.create(dto));
+    @org.springframework.transaction.annotation.Transactional
+    public ResponseEntity<Object> createTeacher(@RequestBody Map<String, Object> payload) {
+        String name = (String) payload.get("nome");
+        String email = (String) payload.get("email");
+        String password = (String) payload.get("senha");
+        String registration = (String) payload.get("matricula");
+        String birthDateStr = (String) payload.get("birth_date");
+        String cityId = (String) payload.get("city_id");
+
+        if (name == null || name.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "O nome é obrigatório"));
+        }
+
+        // Handle User creation or fetch
+        User user = null;
+        if (email != null && !email.trim().isEmpty()) {
+            user = userRepository.findByEmail(email).orElse(null);
+            if (user == null) {
+                user = new User();
+                user.setId(java.util.UUID.randomUUID().toString());
+                user.setName(name);
+                user.setEmail(email);
+                if (password != null && !password.isEmpty()) {
+                    user.setPasswordHash(passwordEncoder.encode(password));
+                }
+                user.setRegistration(registration != null ? registration : "");
+                if (birthDateStr != null && !birthDateStr.isEmpty()) {
+                    user.setBirthDate(java.time.LocalDate.parse(birthDateStr));
+                }
+                user.setRole(RoleEnum.PROFESSOR);
+                if (cityId != null && !cityId.isEmpty()) {
+                    com.gcoedu.core.domain.entity.publics.City city = new com.gcoedu.core.domain.entity.publics.City();
+                    city.setId(cityId);
+                    user.setCity(city);
+                }
+                userRepository.save(user);
+            }
+        }
+
+        com.gcoedu.core.domain.entity.tenant.Teacher teacher = new com.gcoedu.core.domain.entity.tenant.Teacher();
+        teacher.setId(java.util.UUID.randomUUID().toString());
+        teacher.setName(name);
+        teacher.setRegistration(registration != null ? registration : "");
+        if (birthDateStr != null && !birthDateStr.isEmpty()) {
+            teacher.setBirthDate(java.time.LocalDate.parse(birthDateStr));
+        }
+        if (user != null) {
+            teacher.setUser(user);
+        }
+        
+        com.gcoedu.core.domain.entity.tenant.Teacher saved = teacherRepository.save(teacher);
+
+        Map<String, Object> resp = new HashMap<>();
+        resp.put("id", saved.getId());
+        resp.put("name", saved.getName());
+        resp.put("email", user != null ? user.getEmail() : null);
+        resp.put("registration", saved.getRegistration());
+        resp.put("user_id", user != null ? user.getId() : null);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(resp);
     }
 
     @PutMapping("/{id}")
