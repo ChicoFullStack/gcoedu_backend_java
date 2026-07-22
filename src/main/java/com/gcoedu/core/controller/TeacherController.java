@@ -40,7 +40,26 @@ public class TeacherController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TECADM')")
-    public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public ResponseEntity<?> getAllTeachers(@RequestParam(required = false) String schoolId) {
+        if (schoolId != null && !schoolId.isEmpty()) {
+            List<com.gcoedu.core.domain.entity.tenant.Teacher> teachers = schoolTeacherRepository.findTeachersBySchoolId(schoolId);
+            List<Map<String, Object>> dtos = teachers.stream().map(t -> {
+                Map<String, Object> map = new LinkedHashMap<>();
+                map.put("id", t.getId());
+                map.put("name", t.getName());
+                map.put("registration", t.getRegistration());
+                if (t.getUser() != null) {
+                    map.put("email", t.getUser().getEmail());
+                    map.put("role", t.getUser().getRole() != null ? t.getUser().getRole().name().toLowerCase() : "professor");
+                } else {
+                    map.put("email", "");
+                    map.put("role", "professor");
+                }
+                return map;
+            }).collect(Collectors.toList());
+            return ResponseEntity.ok(dtos);
+        }
         return ResponseEntity.ok(teacherService.findAll());
     }
 
