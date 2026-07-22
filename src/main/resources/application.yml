@@ -5,7 +5,7 @@ spring:
     property-naming-strategy: SNAKE_CASE
     default-property-naming-strategy: SNAKE_CASE
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://179.197.232.2:5432/postgres}
+    url: ${DATABASE_URL:jdbc:postgresql://179.197.232.2:5432/postgres?options=-c%20client_encoding=UTF8}
     username: ${DATABASE_USER:postgres}
     password: ${DATABASE_PASS:postgres}
     driver-class-name: org.postgresql.Driver

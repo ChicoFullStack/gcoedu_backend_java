@@ -10,8 +10,8 @@ RUN mvn dependency:go-offline -B
 # Copia o código-fonte da aplicação
 COPY src ./src
 
-# Executa o build da aplicação, ignorando os testes unitários para ser mais rápido no deploy
-RUN mvn clean package -DskipTests
+# Executa o build da aplicação em UTF-8, ignorando os testes unitários para ser mais rápido no deploy
+RUN mvn clean package -DskipTests -Dfile.encoding=UTF-8
 
 # Estágio 2: Execução (Imagem enxuta apenas com o JRE)
 FROM eclipse-temurin:21-jre-alpine
