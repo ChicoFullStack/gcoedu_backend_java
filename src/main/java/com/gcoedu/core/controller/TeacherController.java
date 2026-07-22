@@ -124,6 +124,21 @@ public class TeacherController {
         
         com.gcoedu.core.domain.entity.tenant.Teacher saved = teacherRepository.save(teacher);
 
+        Object escolasIdsObj = payload.get("escolas_ids");
+        if (escolasIdsObj instanceof java.util.List) {
+            java.util.List<?> escolasIds = (java.util.List<?>) escolasIdsObj;
+            for (Object schoolIdObj : escolasIds) {
+                if (schoolIdObj instanceof String schoolIdStr) {
+                    com.gcoedu.core.domain.entity.tenant.SchoolTeacher st = new com.gcoedu.core.domain.entity.tenant.SchoolTeacher();
+                    st.setTeacher(saved);
+                    com.gcoedu.core.domain.entity.tenant.School school = new com.gcoedu.core.domain.entity.tenant.School();
+                    school.setId(schoolIdStr);
+                    st.setSchool(school);
+                    schoolTeacherRepository.save(st);
+                }
+            }
+        }
+
         Map<String, Object> resp = new HashMap<>();
         resp.put("id", saved.getId());
         resp.put("name", saved.getName());
