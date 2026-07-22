@@ -14,4 +14,9 @@ public interface SchoolTeacherRepository extends JpaRepository<SchoolTeacher, UU
             "SELECT st.school.id FROM SchoolTeacher st WHERE st.teacher.user.id = :userId")
     java.util.List<String> findSchoolIdsByTeacherUserId(
             @org.springframework.data.repository.query.Param("userId") String userId);
+
+    @org.springframework.data.jpa.repository.Query(
+            "SELECT st.teacher FROM SchoolTeacher st WHERE st.school.id = :schoolId")
+    java.util.List<com.gcoedu.core.domain.entity.tenant.Teacher> findTeachersBySchoolId(
+            @org.springframework.data.repository.query.Param("schoolId") String schoolId);
 }

@@ -26,20 +26,44 @@ public class TeacherController {
     private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
     private final com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository;
     private final com.gcoedu.core.repository.publics.CityRepository cityRepository;
+    private final com.gcoedu.core.repository.tenant.SchoolTeacherRepository schoolTeacherRepository;
 
-    public TeacherController(TeacherService teacherService, UserRepository userRepository, AuthService authService, org.springframework.security.crypto.password.PasswordEncoder passwordEncoder, com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository, com.gcoedu.core.repository.publics.CityRepository cityRepository) {
+    public TeacherController(TeacherService teacherService, UserRepository userRepository, AuthService authService, org.springframework.security.crypto.password.PasswordEncoder passwordEncoder, com.gcoedu.core.repository.tenant.TeacherRepository teacherRepository, com.gcoedu.core.repository.publics.CityRepository cityRepository, com.gcoedu.core.repository.tenant.SchoolTeacherRepository schoolTeacherRepository) {
         this.teacherService = teacherService;
         this.userRepository = userRepository;
         this.authService = authService;
         this.passwordEncoder = passwordEncoder;
         this.teacherRepository = teacherRepository;
         this.cityRepository = cityRepository;
+        this.schoolTeacherRepository = schoolTeacherRepository;
     }
 
     @GetMapping
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TECADM')")
     public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
         return ResponseEntity.ok(teacherService.findAll());
+    }
+
+    @GetMapping("/school/{schoolId}")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TECADM', 'DIRETOR', 'COORDENADOR')")
+    public ResponseEntity<List<Map<String, Object>>> getTeachersBySchool(@PathVariable String schoolId) {
+        List<com.gcoedu.core.domain.entity.tenant.Teacher> teachers = schoolTeacherRepository.findTeachersBySchoolId(schoolId);
+        
+        List<Map<String, Object>> result = teachers.stream().map(t -> {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("id", t.getId());
+            map.put("name", t.getName());
+            map.put("registration", t.getRegistration());
+            if (t.getUser() != null) {
+                map.put("email", t.getUser().getEmail());
+                map.put("role", t.getUser().getRole() != null ? t.getUser().getRole().name().toLowerCase() : "professor");
+            } else {
+                map.put("email", "");
+                map.put("role", "professor");
+            }
+            return map;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{id}")
