@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/tenant/omr")
+@RequestMapping(value = {"/api/v1/tenant/omr", "/v1/tenant/omr"})
 public class OMRController {
 
     private final EvaluationOMRService evaluationOMRService;

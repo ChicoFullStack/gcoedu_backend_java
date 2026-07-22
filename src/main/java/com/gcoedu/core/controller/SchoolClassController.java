@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = {"/api/v1/tenant/classes", "/class", "/api/class", "/classes", "/api/classes"})
+@RequestMapping(value = {"/api/v1/tenant/classes", "/v1/tenant/classes", "/class", "/api/class", "/classes", "/api/classes"})
 public class SchoolClassController {
 
     private final SchoolClassService classService;

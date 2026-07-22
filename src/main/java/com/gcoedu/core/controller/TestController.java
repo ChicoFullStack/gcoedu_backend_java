@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Collections;
 
 @RestController
-@RequestMapping(value = {"/api/v1/tenant/tests", "/test", "/api/test"})
+@RequestMapping(value = {"/api/v1/tenant/tests", "/v1/tenant/tests", "/test", "/api/test"})
 public class TestController {
 
     private final TestService testService;

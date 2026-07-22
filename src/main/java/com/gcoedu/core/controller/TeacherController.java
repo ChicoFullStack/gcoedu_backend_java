@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = {"/api/v1/tenant/teachers", "/teachers", "/api/teachers", "/teacher", "/api/teacher"})
+@RequestMapping(value = {"/api/v1/tenant/teachers", "/v1/tenant/teachers", "/teachers", "/api/teachers", "/teacher", "/api/teacher"})
 public class TeacherController {
 
     private final TeacherService teacherService;

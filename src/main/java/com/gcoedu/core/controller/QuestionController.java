@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = {"/api/v1/tenant/questions", "/questions", "/api/questions"})
+@RequestMapping(value = {"/api/v1/tenant/questions", "/v1/tenant/questions", "/questions", "/api/questions"})
 public class QuestionController {
 
     private final QuestionService questionService;

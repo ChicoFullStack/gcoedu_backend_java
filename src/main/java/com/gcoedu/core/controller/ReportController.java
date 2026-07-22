@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/tenant/reports")
+@RequestMapping(value = {"/api/v1/tenant/reports", "/v1/tenant/reports"})
 public class ReportController {
 
     private final ReportService reportService;
