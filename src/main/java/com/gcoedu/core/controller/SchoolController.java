@@ -11,7 +11,7 @@ import com.gcoedu.core.domain.dto.tenant.SchoolDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = {"/api/v1/tenant/schools", "/school", "/api/school", "/schools", "/api/schools"})
+@RequestMapping(value = {"/api/v1/tenant/schools", "/v1/tenant/schools", "/school", "/api/school", "/schools", "/api/schools"})
 public class SchoolController {
 
     private final SchoolService schoolService;
