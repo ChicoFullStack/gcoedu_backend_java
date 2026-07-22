@@ -73,7 +73,7 @@ public class TeacherController {
                 if (password != null && !password.isEmpty()) {
                     user.setPasswordHash(passwordEncoder.encode(password));
                 }
-                user.setRegistration(registration != null ? registration : "");
+                user.setRegistration((registration != null && !registration.trim().isEmpty()) ? registration : null);
                 if (birthDateStr != null && !birthDateStr.isEmpty()) {
                     user.setBirthDate(java.time.LocalDate.parse(birthDateStr));
                 }
@@ -90,7 +90,7 @@ public class TeacherController {
         com.gcoedu.core.domain.entity.tenant.Teacher teacher = new com.gcoedu.core.domain.entity.tenant.Teacher();
         teacher.setId(java.util.UUID.randomUUID().toString());
         teacher.setName(name);
-        teacher.setRegistration(registration != null ? registration : "");
+        teacher.setRegistration((registration != null && !registration.trim().isEmpty()) ? registration : null);
         if (birthDateStr != null && !birthDateStr.isEmpty()) {
             teacher.setBirthDate(java.time.LocalDate.parse(birthDateStr));
         }
