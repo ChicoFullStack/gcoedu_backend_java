@@ -17,8 +17,8 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Instala ferramentas básicas como curl caso precise fazer health checks pelo Dokploy
-RUN apk add --no-cache curl
+# Instala ferramentas básicas como curl e bibliotecas C++ nativas para OpenCV (libstdc++, gcompat, libgomp)
+RUN apk add --no-cache curl libstdc++ gcompat libgomp
 
 # Por segurança, rodar como usuário não-root
 RUN addgroup -S spring && adduser -S spring -G spring

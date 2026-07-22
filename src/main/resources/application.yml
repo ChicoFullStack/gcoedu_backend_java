@@ -5,9 +5,9 @@ spring:
     property-naming-strategy: SNAKE_CASE
     default-property-naming-strategy: SNAKE_CASE
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres_db}
-    username: ${DATABASE_USER:postgres_user}
-    password: ${DATABASE_PASS:postgres_password}
+    url: ${DATABASE_URL:jdbc:postgresql://179.197.232.2:5432/postgres}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASS:postgres}
     driver-class-name: org.postgresql.Driver
   jpa:
     open-in-view: false
@@ -18,7 +18,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
+      host: ${REDIS_HOST:redis.bilzao.shop}
       port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:redis1234}
 
@@ -27,9 +27,9 @@ jwt:
   expiration: 86400000 # 24 hours
 
 minio:
-  url: ${MINIO_SERVER_URL:http://localhost:9000}
-  access-key: ${MINIO_ACCESS_KEY:minioadmin}
-  secret-key: ${MINIO_SECRET_KEY:minioadmin123}
+  url: ${MINIO_SERVER_URL:http://backend-minio-5b3619-179-197-232-2.sslip.io}
+  access-key: ${MINIO_ROOT_USER:minioadmin}
+  secret-key: ${MINIO_ROOT_PASSWORD:23rhdehny5hppnmr}
   bucket: ${MINIO_BUCKET:gcoedu}
 
 logging:

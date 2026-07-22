@@ -3296,3 +3296,32 @@ Unconditional classes:
 2026-07-20T20:41:43.767-03:00 DEBUG 14000 --- [gcoedu-core] [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{message=No static resource api/skills for request '/api/skills'., timestamp=2026-07-20T20:41:43.765 (truncated)...]
 2026-07-20T20:41:43.768-03:00 DEBUG 14000 --- [gcoedu-core] [io-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/skills for request '/api/skills'.]
 2026-07-20T20:41:43.768-03:00 DEBUG 14000 --- [gcoedu-core] [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-07-20T22:51:08.594-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/index.html", parameters={}
+2026-07-20T22:51:08.671-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2026-07-20T22:51:08.797-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-07-20T22:51:08.806-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui.css", parameters={}
+2026-07-20T22:51:08.806-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/index.css", parameters={}
+2026-07-20T22:51:08.806-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui-bundle.js", parameters={}
+2026-07-20T22:51:08.808-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2026-07-20T22:51:08.809-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2026-07-20T22:51:08.809-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-initializer.js", parameters={}
+2026-07-20T22:51:08.809-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui-standalone-preset.js", parameters={}
+2026-07-20T22:51:08.808-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2026-07-20T22:51:08.810-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2026-07-20T22:51:08.810-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2026-07-20T22:51:08.821-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-07-20T22:51:08.822-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-07-20T22:51:08.844-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-07-20T22:51:08.848-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-07-20T22:51:08.885-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-07-20T22:51:09.033-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/v3/api-docs/swagger-config", parameters={}
+2026-07-20T22:51:09.033-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springdoc.webmvc.ui.SwaggerConfigResource#openapiJson(HttpServletRequest)
+2026-07-20T22:51:09.048-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json]
+2026-07-20T22:51:09.049-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing [{configUrl=/v3/api-docs/swagger-config, oauth2RedirectUrl=http://localhost:8080/swagger-ui/oauth2-re (truncated)...]
+2026-07-20T22:51:09.051-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-07-20T22:51:09.061-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/v3/api-docs", parameters={}
+2026-07-20T22:51:09.062-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springdoc.webmvc.api.OpenApiWebMvcResource#openapiJson(HttpServletRequest, String, Locale)
+2026-07-20T22:51:12.349-03:00  INFO 14000 --- [gcoedu-core] [nio-8080-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 3272 ms
+2026-07-20T22:51:12.406-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [application/json, */*] and supported [application/json]
+2026-07-20T22:51:12.425-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [{7b226f70656e617069223a22332e312e30222c22696e666f223a7b227469746c65223a224f70656e41504920646566696e6 (truncated)...]
+2026-07-20T22:51:12.427-03:00 DEBUG 14000 --- [gcoedu-core] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
