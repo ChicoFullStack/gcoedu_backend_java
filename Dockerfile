@@ -24,11 +24,15 @@ RUN apk add --no-cache curl libstdc++ gcompat libgomp
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
+# Configura o locale para UTF-8 no contêiner
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
 # Copia o arquivo .jar gerado no primeiro estágio
 COPY --from=build /app/target/*.jar app.jar
 
 # Expõe a porta que o Spring Boot vai usar (por padrão 8080)
 EXPOSE 8080
 
-# Parâmetros de otimização de memória para contêineres e inicialização
-ENTRYPOINT ["java", "-XX:+UseZGC", "-XX:+ZGenerational", "-jar", "app.jar"]
+# Parâmetros de otimização de memória e encoding UTF-8 para inicialização
+ENTRYPOINT ["java", "-Dfile.encoding=UTF-8", "-XX:+UseZGC", "-XX:+ZGenerational", "-jar", "app.jar"]
