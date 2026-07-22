@@ -21,7 +21,7 @@ public class StudentController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TEACHER')")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TEACHER', 'DIRETOR', 'COORDENADOR', 'TECADM')")
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
         return ResponseEntity.ok(studentService.findAll());
     }
