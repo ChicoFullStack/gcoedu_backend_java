@@ -17,4 +17,11 @@ public interface TeacherClassRepository extends JpaRepository<TeacherClass, Stri
             WHERE tc.teacher.user.id = :userId
             """)
     List<String> findClassIdsByTeacherUserId(@Param("userId") String userId);
+
+    @Query("""
+            SELECT tc.teacher
+            FROM TeacherClass tc
+            WHERE tc.schoolClass.id = :classId
+            """)
+    List<com.gcoedu.core.domain.entity.tenant.Teacher> findTeachersByClassId(@Param("classId") String classId);
 }

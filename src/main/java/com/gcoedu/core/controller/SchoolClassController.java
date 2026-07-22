@@ -15,9 +15,11 @@ import java.util.List;
 public class SchoolClassController {
 
     private final SchoolClassService classService;
+    private final com.gcoedu.core.repository.tenant.TeacherClassRepository teacherClassRepository;
 
-    public SchoolClassController(SchoolClassService classService) {
+    public SchoolClassController(SchoolClassService classService, com.gcoedu.core.repository.tenant.TeacherClassRepository teacherClassRepository) {
         this.classService = classService;
+        this.teacherClassRepository = teacherClassRepository;
     }
 
     @GetMapping
@@ -42,10 +44,25 @@ public class SchoolClassController {
     }
 
     @GetMapping("/{id}/teachers")
-    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TECADM', 'TEACHER')")
-    public ResponseEntity<List<Object>> getClassTeachers(@PathVariable String id) {
-        // Return empty list for now, to satisfy frontend until ClassTeacher is implemented
-        return ResponseEntity.ok(java.util.Collections.emptyList());
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'TECADM', 'TEACHER', 'DIRETOR', 'COORDENADOR')")
+    public ResponseEntity<List<java.util.Map<String, Object>>> getClassTeachers(@PathVariable String id) {
+        List<com.gcoedu.core.domain.entity.tenant.Teacher> teachers = teacherClassRepository.findTeachersByClassId(id);
+        
+        List<java.util.Map<String, Object>> result = teachers.stream().map(t -> {
+            java.util.Map<String, Object> map = new java.util.LinkedHashMap<>();
+            map.put("id", t.getId());
+            map.put("name", t.getName());
+            map.put("registration", t.getRegistration());
+            if (t.getUser() != null) {
+                map.put("email", t.getUser().getEmail());
+                map.put("role", t.getUser().getRole() != null ? t.getUser().getRole().name().toLowerCase() : "professor");
+            } else {
+                map.put("email", "");
+                map.put("role", "professor");
+            }
+            return map;
+        }).collect(java.util.stream.Collectors.toList());
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping
