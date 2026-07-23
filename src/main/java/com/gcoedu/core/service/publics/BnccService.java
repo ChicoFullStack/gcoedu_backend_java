@@ -23,7 +23,7 @@ public class BnccService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public Object getHabilidades(Map<String, String> queryParams) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl + "/habilidades");
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl + "/habilidades");
         if (queryParams != null) {
             queryParams.forEach(builder::queryParam);
         }
