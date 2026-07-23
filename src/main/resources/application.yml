@@ -49,3 +49,8 @@ logging:
     com.gcoedu.core: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+bncc:
+  api:
+    url: ${BNCC_API_URL:https://bncc.api.br/api/v1}
+    key: ${BNCC_API_KEY:bncc_live_JhwkWPg9CbuWbhu7pq_GVEfhS4dF52X8CLxDlt1lmtE}
