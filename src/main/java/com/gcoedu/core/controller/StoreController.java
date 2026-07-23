@@ -16,6 +16,11 @@ public class StoreController {
         return ResponseEntity.ok(Map.of("items", List.of()));
     }
 
+    @GetMapping("/admin/items")
+    public ResponseEntity<Map<String, List<Object>>> getAdminStoreItems() {
+        return ResponseEntity.ok(Map.of("items", List.of()));
+    }
+
     @PostMapping("/purchase")
     public ResponseEntity<Map<String, Boolean>> purchaseItem(@RequestBody Map<String, Object> payload) {
         // Stub da fase 3

@@ -10,6 +10,18 @@ import java.util.Map;
 @RequestMapping(value = {"/competitions", "/api/competitions"})
 public class CompetitionsController {
 
+    @GetMapping({"", "/"})
+    public ResponseEntity<Map<String, Object>> getCompetitions() {
+        return ResponseEntity.ok(Map.of(
+            "data", List.of(),
+            "meta", Map.of(
+                "current_page", 1,
+                "last_page", 1,
+                "total", 0
+            )
+        ));
+    }
+
     @GetMapping("/ranking")
     public ResponseEntity<Map<String, List<Object>>> getRanking() {
         // Stub da fase 3

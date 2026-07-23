@@ -27,4 +27,16 @@ public class EvaluationResultsController {
         }
         return ResponseEntity.ok(evaluationResultRepository.findAll());
     }
+
+    @GetMapping("/opcoes-filtros")
+    public ResponseEntity<java.util.Map<String, Object>> getOpcoesFiltros() {
+        return ResponseEntity.ok(java.util.Map.of(
+            "estados", java.util.Collections.emptyList(),
+            "municipios", java.util.Collections.emptyList(),
+            "escolas", java.util.Collections.emptyList(),
+            "series", java.util.Collections.emptyList(),
+            "turmas", java.util.Collections.emptyList(),
+            "avaliacoes", java.util.Collections.emptyList()
+        ));
+    }
 }

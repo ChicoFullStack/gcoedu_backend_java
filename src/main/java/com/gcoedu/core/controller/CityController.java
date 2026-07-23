@@ -32,6 +32,11 @@ public class CityController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{id}/branding")
+    public ResponseEntity<Map<String, Object>> getCityBranding(@PathVariable String id) {
+        return ResponseEntity.ok(Map.of());
+    }
+
     @GetMapping("/{id}/users")
     public ResponseEntity<Map<String, Object>> getUsersByCity(@PathVariable String id) {
         List<User> users = userRepository.findByCityId(id);

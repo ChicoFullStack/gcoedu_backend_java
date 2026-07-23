@@ -156,6 +156,11 @@ public class UserController {
         return ResponseEntity.ok(Map.of("id", id));
     }
 
+    @org.springframework.web.bind.annotation.PostMapping("/user-settings/{id}")
+    public ResponseEntity<Map<String, Object>> updateUserSettings(@PathVariable String id, @RequestBody Map<String, Object> body) {
+        return ResponseEntity.ok(body);
+    }
+
     @GetMapping({"/managers", "/managers/me"})
     public ResponseEntity<Object> getManagers() {
         return ResponseEntity.ok(java.util.Collections.emptyList());

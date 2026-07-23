@@ -14,4 +14,9 @@ public class CertificatesController {
     public ResponseEntity<DashboardDTO.Quantity> getCertificatesQuantidade() {
         return ResponseEntity.ok(new DashboardDTO.Quantity(0));
     }
+
+    @GetMapping("/evaluations")
+    public ResponseEntity<java.util.Map<String, java.util.List<Object>>> getEvaluations() {
+        return ResponseEntity.ok(java.util.Map.of("data", java.util.Collections.emptyList()));
+    }
 }
