@@ -36,7 +36,8 @@ public class AuthService {
         }
 
         String tenantId = user.getCity() != null ? user.getCity().getId() : "public";
-        String token = jwtUtils.generateToken(user.getEmail(), user.getRole().name(), tenantId);
+        String subject = (user.getEmail() != null && !user.getEmail().isEmpty()) ? user.getEmail() : user.getRegistration();
+        String token = jwtUtils.generateToken(subject, user.getRole().name(), tenantId);
 
         java.util.Map<String, Object> userMap = new java.util.HashMap<>();
         userMap.put("id", user.getId());
