@@ -19,8 +19,7 @@ public class AnswerSheetController {
 
     private final AnswerSheetGabaritoRepository gabaritoRepository;
 
-    @org.springframework.beans.factory.annotation.Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @PostMapping("/create-gabaritos")
     public ResponseEntity<Map<String, Object>> createGabarito(@RequestBody Map<String, Object> payload) {
