@@ -24,11 +24,17 @@ public class AnswerSheetGabarito {
     @JoinColumn(name = "class_id")
     private SchoolClass schoolClass;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "num_questions", nullable = false)
     private Integer numQuestions;
 
     @Column(name = "use_blocks")
     private Boolean useBlocks = false;
+
+    @Column(name = "separate_by_subject")
+    private Boolean separateBySubject = false;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "blocks_config")
