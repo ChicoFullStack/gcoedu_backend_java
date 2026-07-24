@@ -121,6 +121,38 @@ public class AnswerSheetController {
         ));
     }
 
+    @GetMapping("/gabarito/{id}")
+    public ResponseEntity<Map<String, Object>> getGabaritoDetail(@PathVariable String id) {
+        AnswerSheetGabarito g = gabaritoRepository.findById(id).orElse(null);
+        if (g == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        Map<String, Object> map = new java.util.HashMap<>();
+        map.put("id", g.getId());
+        map.put("title", g.getTitle() != null ? g.getTitle() : "");
+        map.put("num_questions", g.getNumQuestions() != null ? g.getNumQuestions() : 0);
+        map.put("use_blocks", g.getUseBlocks() != null ? g.getUseBlocks() : false);
+        map.put("correct_answers", g.getCorrectAnswers() != null ? g.getCorrectAnswers() : "{}");
+        map.put("blocks_config", g.getBlocksConfig() != null ? g.getBlocksConfig() : "{}");
+        
+        return ResponseEntity.ok(map);
+    }
+
+    @GetMapping("/gabarito/{id}/students")
+    public ResponseEntity<Map<String, Object>> getGabaritoStudents(@PathVariable String id, 
+            @RequestParam(required = false) String class_id,
+            @RequestParam(required = false) String grade_id,
+            @RequestParam(required = false) String school_id,
+            @RequestParam(required = false) String flat) {
+        
+        return ResponseEntity.ok(Map.of(
+            "gabarito_id", id,
+            "classes", java.util.Collections.emptyList(),
+            "students", java.util.Collections.emptyList()
+        ));
+    }
+
     @GetMapping("/manual-entry")
     public ResponseEntity<Map<String, Object>> getManualEntry(
             @RequestParam(required = false) String gabarito_id,
@@ -128,7 +160,7 @@ public class AnswerSheetController {
             @RequestParam String student_id) {
         return ResponseEntity.ok(Map.of(
             "student_id", student_id,
-            "answers", Collections.emptyMap()
+            "answers", java.util.Collections.emptyMap()
         ));
     }
 }
