@@ -97,6 +97,30 @@ public class AnswerSheetController {
         return ResponseEntity.ok(Map.of("status", "completed", "progress", 100));
     }
 
+    @GetMapping("/gabaritos")
+    public ResponseEntity<Map<String, Object>> getGabaritos() {
+        java.util.List<AnswerSheetGabarito> all = gabaritoRepository.findAll();
+        java.util.List<Map<String, Object>> list = all.stream().map(g -> {
+            Map<String, Object> map = new java.util.HashMap<>();
+            map.put("id", g.getId());
+            map.put("title", g.getTitle() != null ? g.getTitle() : "");
+            map.put("num_questions", g.getNumQuestions() != null ? g.getNumQuestions() : 0);
+            return map;
+        }).toList();
+        return ResponseEntity.ok(Map.of("gabaritos", list));
+    }
+
+    @GetMapping("/opcoes-filtros")
+    public ResponseEntity<Map<String, Object>> getOpcoesFiltros() {
+        return ResponseEntity.ok(Map.of(
+            "state", Collections.emptyList(),
+            "city", Collections.emptyList(),
+            "school", Collections.emptyList(),
+            "grade", Collections.emptyList(),
+            "class", Collections.emptyList()
+        ));
+    }
+
     @GetMapping("/manual-entry")
     public ResponseEntity<Map<String, Object>> getManualEntry(
             @RequestParam(required = false) String gabarito_id,
